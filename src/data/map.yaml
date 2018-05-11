@@ -1,0 +1,11 @@
+map:
+  config:
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAvlvUqgMxe_GAioXaZ9TM-51iyHMwJh1I&v=3.exp"
+    zoom: 15
+    center:
+      lat: 18.782492
+      lng: 98.992831
+    marker:
+      lat: 18.782187121947516
+      lng: 98.99412274360657
+  content: We are happy to organise pick-up from the airport or your hotel for any tours organised with us.

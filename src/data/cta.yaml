@@ -1,0 +1,21 @@
+cta:
+  - title: Welcome to Chiang Mai!
+    subtitle: Our favourite province
+    content: We are looking for anyone who wants to try something different while in Thailand. If you think you are that person we would like to welcome you to join us. Let's make your holiday one to remember!
+    action: View Gallery
+    to: "/gallery"
+
+
+  - title: Tours & Trekking
+    subtitle: Get off the beaten track
+    content: One day.. Overnight? Four days!? Go by car, ride your own motorbike, or be a passenger with one of our skilled drivers. We encourage you to contact us to customize your adventure out of the many activities we have on offer. What do you enjoy the most?
+    action: Learn More
+    to: "/tours"
+
+
+  - title: A Genuine Experience
+    subtitle: Let us look after you
+    content: Our headquarters provide clean, relaxed accommodation alongside Chiang Mai old city centre. Only a short stroll to the moat walls, night markets, and numerous temples. Take a break from the city noise and bustle while staying at our home.
+    action: See Rooms
+    to: "/rooms"
+

@@ -1,0 +1,77 @@
+{
+  "name": "sdt-gatsby",
+  "author": "Duncan Bay",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "feather-icons": "4.7.0",
+    "gatsby": "^1.9.76",
+    "gatsby-image": "^1.0.13",
+    "gatsby-link": "^1.6.21",
+    "gatsby-plugin-google-analytics": "^1.0.10",
+    "gatsby-plugin-offline": "^1.0.10",
+    "gatsby-plugin-react-next": "^1.0.4",
+    "gatsby-plugin-sharp": "^1.6.9",
+    "gatsby-plugin-styled-components": "2.0.11",
+    "gatsby-source-filesystem": "^1.5.5",
+    "gatsby-transformer-json": "^1.0.11",
+    "gatsby-transformer-sharp": "^1.6.10",
+    "gatsby-transformer-yaml": "^1.5.11",
+    "grid-styled": "4.1.0",
+    "normalize.css": "8.0.0",
+    "polished": "1.9.2",
+    "prop-types": "^15.6.0",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "react-google-maps": "9.4.5",
+    "styled-components": "3.2.6",
+    "styled-system": "2.2.4"
+  },
+  "scripts": {
+    "dev": "gatsby develop",
+    "build": "gatsby build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prettify": "prettier --write '{./,__{tests,mocks}__}/**/*.+(js|jsx)'"
+  },
+  "jest": {
+    "testRegex": "(\\.(test|spec))\\.(jsx|js)$",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/.cache/"
+    ],
+    "moduleFileExtensions": [
+      "jsx",
+      "js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "<rootDir>/internals/testing/setupTests.js"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov",
+      "text",
+      "html"
+    ]
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "1.5.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.1.4",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-loader": "2.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.4.0",
+    "jest": "22.4.3",
+    "prettier": "1.12.1"
+  }
+}

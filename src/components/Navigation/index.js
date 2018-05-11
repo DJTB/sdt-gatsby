@@ -1,22 +1,38 @@
 import React, { Component } from 'react';
 import Link from 'gatsby-link';
-import styled, { css } from 'styled-components';
-import colors from '../../utils/colors';
+import styled from 'styled-components';
+import { themeGet } from 'styled-system';
+import Headroom from 'react-headroom';
+import { Container } from 'components/Layout';
+import media from 'utils/media';
+import feather from 'utils/feather';
+import { ButtonPlain } from 'components/Buttons';
 import MobileNav from './mobile';
-import media from '../../utils/media';
-import { ButtonPlain } from '../../components/Buttons';
-import { Box } from '../../components/Layout';
 
-const basicNav = css`
-  display: flex;
-  align-items: center;
-  color: ${colors.primary};
-  background-color: ${colors.secondary};
-  margin: 0;
+const HomeLink = styled(Link)`
+  ${themeGet('fontStyles.brand')};
+  font-size: 2rem;
+`;
+
+const basicNav = styled.div`
+  line-height: 1;
+  font-weight: 600;
   width: 100%;
-  list-style-type: none;
-  box-shadow: 0px 1px 10px 0px ${colors.gray[2]};
-  padding: 1rem;
+  color: ${themeGet('colors.secondary')};
+  background-color: ${themeGet('colors.black')};
+
+  .headroom--pinned &,
+  .headroom--unfixed & {
+    box-shadow: ${themeGet('shadows.box.small')};
+  }
+
+  & ${Container} {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   & ul {
     list-style-type: none;
@@ -27,37 +43,52 @@ const basicNav = css`
   }
 `;
 
-const FullNav = styled(Box)`
-  ${basicNav};
+const FullNav = basicNav.extend`
   display: none;
-
-  & li {
-    margin: 0;
-  }
-
-  & li img {
-    display: inline-block;
-    vertical-align: middle;
-  }
 
   & ul {
     display: flex;
     justify-content: flex-end;
     margin-left: auto;
 
-    & li {
-      margin-left: 1.25rem;
+    li {
+      margin: 0;
+      margin-left: 1.5rem;
+      font-style: italic;
+    }
+
+    li a {
+      position: relative;
     }
   }
 
-  ${media.mid`
+  & ul li a::after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: ${themeGet('colors.secondary')};
+    content: '';
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(0.3rem);
+  }
+
+  & ul li a:hover::after,
+  & ul li a:focus::after,
+  & ul li a[aria-current=true]::after {
+    opacity: 0.95;
+    transform: translateY(0rem);
+  }
+
+  ${media.small`
     display: flex;
   `};
 `;
 
 // Styles for the mobile View of the navigation
-const MobileNavToggler = styled(Box)`
-  ${basicNav};
+const MobileNavToggler = basicNav.extend`
   & li {
     margin: 0;
   }
@@ -73,7 +104,7 @@ const MobileNavToggler = styled(Box)`
     margin: auto;
   }
 
-  ${media.mid`
+  ${media.small`
     display: none;
   `};
 `;
@@ -83,53 +114,53 @@ const ROUTES = [
   { to: '/rooms', children: 'Rooms' },
   { to: '/gallery', children: 'Gallery' },
   { to: '/team', children: 'Team' },
-  { to: '/map', children: 'Find Us' }
+  { to: '/map', children: 'Map' }
 ];
 
 class Navigation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mobileActive: false
-    };
-    this.toggleNav = this.toggleNav.bind(this);
-  }
+  state = {
+    mobileActive: false
+  };
 
-  toggleNav() {
+  toggleNav = () => {
     if (this.state.mobileActive) {
       this.setState({ mobileActive: false });
     } else {
       this.setState({ mobileActive: true });
     }
-  }
+  };
 
   render() {
     return (
       <nav>
-        <FullNav width="100%" px={[3, 3, 4]} routes={ROUTES}>
-          <Link to="/">SDT</Link>
-          <ul>
-            {ROUTES.map(({ to, children }) => (
-              <li tabIndex={this.state.mobileActive ? '-1' : '0'} key={to}>
-                <Link to={to}>{children}</Link>
-              </li>
-            ))}
-          </ul>
-        </FullNav>
-        <MobileNavToggler width="100%" px={[3, 3, 4]}>
-          <Link to="/">SDT</Link>
-          <ul>
-            <li>
+        <Headroom>
+          <FullNav>
+            <Container>
+              <HomeLink to="/">SDT</HomeLink>
+              <ul>
+                {ROUTES.map(({ to, children }) => (
+                  <li key={to}>
+                    <Link to={to} activeClassName="active">
+                      {children}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Container>
+          </FullNav>
+          <MobileNavToggler>
+            <Container>
+              <HomeLink to="/">SDT</HomeLink>
               <ButtonPlain
                 type="button"
                 onClick={this.toggleNav}
                 onKeyPress={this.toggleNav}
               >
-                MENU
+                {feather({ name: 'menu', measureArray: [36, 36] })}
               </ButtonPlain>
-            </li>
-          </ul>
-        </MobileNavToggler>
+            </Container>
+          </MobileNavToggler>
+        </Headroom>
         {this.state.mobileActive && (
           <MobileNav toggleNav={this.toggleNav}>
             <ul>

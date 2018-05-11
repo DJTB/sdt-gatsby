@@ -3,7 +3,12 @@ module.exports = {
     title: 'Something Different Tours'
   },
   plugins: [
-    // Adding various source folders to the GraphQL layer.
+    {
+      resolve: 'gatsby-plugin-resolve-src',
+      options: {
+        addSassLoader: false
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -26,15 +31,21 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`
+      }
+    },
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: `UA-48868860-1`
       }
     },
     'gatsby-transformer-json',
-    'gatsby-transformer-yaml',
     'gatsby-transformer-sharp',
     'gatsby-plugin-styled-components',
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     'gatsby-plugin-offline',
     'gatsby-plugin-react-next'

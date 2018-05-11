@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Capture It';
+  font-style: normal;
+  font-display: fallback;
+  font-weight: 400;
+  src:
+    local('Capture It '),
+    local('Capture It'),
+    url(./Capture_it-subset.woff2) format("woff2"),
+    url(./Capture_it-subset.woff) format("woff");
+  unicode-range: U+20-7E;
+}

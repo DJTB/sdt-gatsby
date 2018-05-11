@@ -1,26 +1,38 @@
 import React from 'react';
-import styled, { injectGlobal } from 'styled-components';
-import { fontSize } from 'styled-system';
 import PropTypes from 'prop-types';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import colors from '../utils/colors';
+import styled, { injectGlobal, ThemeProvider } from 'styled-components';
+import Helmet from 'react-helmet';
+import 'assets/fonts/Capture_it.css';
+import Navigation from 'components/Navigation';
+import Footer from 'components/Footer';
+import siteBgSrc from 'assets/images/bg-tile.png';
+import theme from 'utils/theme';
 
 /* eslint-disable */
-import normalize from 'normalize.css';
 injectGlobal`
   * {
-      font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir, 'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial, sans-serif;
-      box-sizing: border-box;
-  };
-
-  html {
-    height: 100vh;
+    box-sizing: border-box;
   }
 
-  /* for sticky footer */
+  html {
+    height: 100vh; /* sticky footer */
+    background-color: #1a1a1a;
+    background-image: url(${siteBgSrc});
+  }
+
   body, #___gatsby {
-    height: 100%;
+    height: 100%; /* sticky footer */
+    color: ${theme.colors.white};
+  }
+
+  h1 {
+    color: ${theme.colors.accent};
+    text-shadow: ${theme.shadows.text.small};
+  }
+
+  h2, h3 {
+    color: ${theme.colors.orange[2]};
+    text-shadow: ${theme.shadows.text.small};
   }
 
   a {
@@ -28,37 +40,43 @@ injectGlobal`
     color: inherit;
   };
 
-  h1, h2, h3, h4, h5, h6 {
-    color: ${colors.text}
-  };
-
-  p {
-    color: ${colors.text}
+  .font-brand {
+    ${theme.fontStyles.brand};
   }
 `;
 /* eslint-enable */
 
-const FontConfig = styled.div`
-  ${fontSize};
-  /* sticky footer assuming header + main + footer */
+const StickyFooter = styled.div`
+  /* assumes <header/> + <main/> + <footer/> siblings */
   min-height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
 `;
 
-const Layout = ({ children, data }) => (
-  <FontConfig fontSize={[2, 3, 4]}>
-    <header>
-      <Navigation />
-    </header>
-    <main>{children()}</main>
-    <Footer {...data.site.siteMetadata} />
-  </FontConfig>
+const Main = styled.main`
+  margin-bottom: 2rem;
+`;
+
+const Layout = ({ location, children, data }) => (
+  <ThemeProvider theme={theme}>
+    <React.Fragment>
+      <Helmet defaultTitle="SDT" titleTemplate="%s | SDT">
+        <meta name="og:type" content="website" />
+        <meta name="og:site_name" content="Something Different Tours" />
+      </Helmet>
+      <StickyFooter>
+        <header>
+          <Navigation />
+        </header>
+        <Main>{children()}</Main>
+        <Footer {...data.allSocialJson.edges[0].node} />
+      </StickyFooter>
+    </React.Fragment>
+  </ThemeProvider>
 );
 
 Layout.propTypes = {
   children: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object.isRequired
 };
 
@@ -66,9 +84,22 @@ export default Layout;
 
 export const query = graphql`
   query LayoutQuery {
-    site {
-      siteMetadata {
-        title
+    allSocialJson {
+      edges {
+        node {
+          address {
+            house
+            city
+            state
+            postcode
+          }
+          phone
+          mobile1
+          mobile2
+          email
+          facebookUrl
+          tripadvisorUrl
+        }
       }
     }
   }

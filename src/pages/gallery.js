@@ -1,30 +1,40 @@
-/* eslint-disable no-undef, react/prop-types */
 import React from 'react';
-import { Box } from '../components/Layout';
-import colors from '../utils/colors';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { Container, PageHeading } from 'components/Layout';
+import Gallery from 'components/Gallery';
 
-const Gallery = () => (
-  <Box bg={colors.primary}>
-    <Box
-      width={[1, 1, 1 / 2]}
-      m={['3.5rem 0 0 0', '3.5rem 0 0 0', '3.5rem auto 0 auto']}
-      px={[3, 3, 0]}
-      color={colors.secondary}
-    >
-      <h1>Gallery</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-        amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-        nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-        rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-        ipsum dolor sit amet.
-      </p>
-    </Box>
-  </Box>
+export default ({ data }) => (
+  <Container>
+    <Helmet>
+      <title>Gallery</title>
+      <meta
+        name="description"
+        content="Photos taken with customers on Something Different Tours"
+      />
+    </Helmet>
+    <PageHeading>Intrepid Explorers</PageHeading>
+    <Gallery
+      data={data.images.edges.map(({ node }) => node.childImageSharp.sizes)}
+    />
+  </Container>
 );
 
-export default Gallery;
+export const pageQuery = graphql`
+  query GalleryQuery {
+    images: allFile(
+      filter: { relativeDirectory: { eq: "gallery" } }
+      sort: { fields: [base], order: ASC }
+    ) {
+      edges {
+        node {
+          childImageSharp {
+            sizes(maxWidth: 768, quality: 85) {
+              ...GatsbyImageSharpSizes
+            }
+          }
+        }
+      }
+    }
+  }
+`;

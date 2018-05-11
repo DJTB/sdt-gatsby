@@ -1,9 +1,10 @@
 // https://palx.jxnblk.com/ff8f33
 
 export const palette = {
-  base: '#ff8f33',
-  black: '#433e39',
+  brand: '#ff8f33',
+  accent: '#fadfa8',
   white: '#fefefe',
+  black: '#433e39',
   gray: [
     '#f9f9f8',
     '#efedea',
@@ -165,7 +166,7 @@ export const palette = {
 const colors = {
   ...palette,
   primary: palette.white,
-  secondary: palette.base,
+  secondary: palette.brand,
   text: palette.black
 };
 

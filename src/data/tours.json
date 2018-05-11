@@ -1,0 +1,40 @@
+[
+  {
+    "intro":
+      "We began giving tours in 2007 with a group of tour guides who had much experience in jungle exploration. All the guide come from the countryside and wanted to do something different when taking visitors into the village. We know many people come to Thailand because they want to see the real lifestyle of Thai people, such as how Thai people live in the countryside and daily activities of Thai people. Our trip will take you to remote areas where few tourists have been and we will share our experiences with you. Our aim is for you to keep our trip in your memory after you have visited Thailand. If you would like to know more information, or speak to us about your trip to Thailand, please email or visit us in person.",
+    "priceIncludes": [
+      "English speaking tour guide",
+      "Transportation & drinking water",
+      "Meals during program",
+      "National park entry fees",
+      "Accommodation",
+      "Medical insurance"
+    ],
+    "priceExcludes": [
+      "Softdrinks or alcohol",
+      "Activity outside of program",
+      "Service tips"
+    ],
+    "programs": [
+      {
+        "id": "custom",
+        "title": "Custom Tour",
+        "content": [
+          "Our experienced tour guides will take you to visit the countryside of Thailand. We will go by motorbikes and 4x4 car. We will always have car service following the trip that can support you at any time. If you would like to do the tour by motorbike, you can drive yourself or you can be a passenger with one of our guides if you cannot drive.",
+          "Possible activities for your trip include (but are not limited to): Off-Road Motorbiking, Jungle Trekking, Waterfalls Swimming, Hot Springs, Elephants, Bamboo Rafting, Hilltribe Villages, Doi Suthep Temple, and Doi Inthanon National Park.",
+          "The accommodations will vary depending on your needs, the season and where we end up staying. The accommodations could be a standard room with fan or air-con, local home stay or tents. This tour is not a set program but flexible based on what you would like to see and where you would like to go."
+        ],
+        "notes": ["Minimum 2 people for this trip to run"],
+        "price": 3950
+      },
+      {
+        "id": "placeholder",
+        "title": "One Day, Overnight, Three, & Four Day Programs",
+        "content": [
+          "We are currently revising our standard programs to ensure we continue to offer a unique experience to you!"
+        ],
+        "notes": ["Please contact us for more information."]
+      }
+    ]
+  }
+]

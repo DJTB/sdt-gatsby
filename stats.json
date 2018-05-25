@@ -1,0 +1,80 @@
+{
+  "assetsByChunkName": {
+    "component---src-pages-rooms-js": [
+      "component---src-pages-rooms-js-939f1ba4b5f8120eb36e.js",
+      "component---src-pages-rooms-js-939f1ba4b5f8120eb36e.js.map"
+    ],
+    "path---rooms": [
+      "path---rooms-5c5446df7228cfe02bce.js",
+      "path---rooms-5c5446df7228cfe02bce.js.map"
+    ],
+    "path---map": [
+      "path---map-87345d723b7883e63ecb.js",
+      "path---map-87345d723b7883e63ecb.js.map"
+    ],
+    "component---src-pages-gallery-js": [
+      "component---src-pages-gallery-js-039d59af5e28d4b0e9cd.js",
+      "component---src-pages-gallery-js-039d59af5e28d4b0e9cd.js.map"
+    ],
+    "component---src-pages-index-js": [
+      "component---src-pages-index-js-52e83e922ee74567667f.js",
+      "component---src-pages-index-js-52e83e922ee74567667f.js.map"
+    ],
+    "path---": [
+      "path----cc85f74f11766e747f38.js",
+      "path----cc85f74f11766e747f38.js.map"
+    ],
+    "component---node-modules-gatsby-plugin-offline-app-shell-js": [
+      "component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js",
+      "component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js.map"
+    ],
+    "path---tours": [
+      "path---tours-298165ef98d3a008bb2c.js",
+      "path---tours-298165ef98d3a008bb2c.js.map"
+    ],
+    "component---src-layouts-index-js": [
+      "component---src-layouts-index-js-d0c8dce0bab1186923c8.js",
+      "component---src-layouts-index-js-d0c8dce0bab1186923c8.js.map"
+    ],
+    "path---gallery": [
+      "path---gallery-9c4bb97f699245bf755b.js",
+      "path---gallery-9c4bb97f699245bf755b.js.map"
+    ],
+    "component---src-pages-team-js": [
+      "component---src-pages-team-js-d0340ed05e979f3ccef4.js",
+      "component---src-pages-team-js-d0340ed05e979f3ccef4.js.map"
+    ],
+    "path---index": [
+      "path---index-4edd5db9d7c65139d84c.js",
+      "path---index-4edd5db9d7c65139d84c.js.map"
+    ],
+    "commons": [
+      "commons-222912293cef50acfc32.js",
+      "build-js-styles.css",
+      "commons-222912293cef50acfc32.js.map",
+      "build-js-styles.css.map"
+    ],
+    "component---src-pages-tours-js": [
+      "component---src-pages-tours-js-8981560863a418928103.js",
+      "component---src-pages-tours-js-8981560863a418928103.js.map"
+    ],
+    "path---team": [
+      "path---team-9436100e28aa4a30575d.js",
+      "path---team-9436100e28aa4a30575d.js.map"
+    ],
+    "path---offline-plugin-app-shell-fallback": [
+      "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js",
+      "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "app": [
+      "app-67e5d76ea3f9b905483d.js",
+      "build-js-styles.css",
+      "app-67e5d76ea3f9b905483d.js.map",
+      "build-js-styles.css.map"
+    ],
+    "component---src-pages-map-js": [
+      "component---src-pages-map-js-86bf22544f4b6fd5f40d.js",
+      "component---src-pages-map-js-86bf22544f4b6fd5f40d.js.map"
+    ]
+  }
+}

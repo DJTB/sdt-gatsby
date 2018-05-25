@@ -5,8 +5,8 @@
       "component---src-pages-rooms-js-939f1ba4b5f8120eb36e.js.map"
     ],
     "path---rooms": [
-      "path---rooms-5c5446df7228cfe02bce.js",
-      "path---rooms-5c5446df7228cfe02bce.js.map"
+      "path---rooms-99563bbee51b1b624e0e.js",
+      "path---rooms-99563bbee51b1b624e0e.js.map"
     ],
     "path---map": [
       "path---map-87345d723b7883e63ecb.js",
@@ -29,12 +29,12 @@
       "component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js.map"
     ],
     "path---tours": [
-      "path---tours-298165ef98d3a008bb2c.js",
-      "path---tours-298165ef98d3a008bb2c.js.map"
+      "path---tours-1cf1b58bdd3cc670e710.js",
+      "path---tours-1cf1b58bdd3cc670e710.js.map"
     ],
     "component---src-layouts-index-js": [
-      "component---src-layouts-index-js-d0c8dce0bab1186923c8.js",
-      "component---src-layouts-index-js-d0c8dce0bab1186923c8.js.map"
+      "component---src-layouts-index-js-ee72d57b7a54ace0d36a.js",
+      "component---src-layouts-index-js-ee72d57b7a54ace0d36a.js.map"
     ],
     "path---gallery": [
       "path---gallery-9c4bb97f699245bf755b.js",
@@ -45,8 +45,8 @@
       "component---src-pages-team-js-d0340ed05e979f3ccef4.js.map"
     ],
     "path---index": [
-      "path---index-4edd5db9d7c65139d84c.js",
-      "path---index-4edd5db9d7c65139d84c.js.map"
+      "path---index-6f64b530474ca2f18c9d.js",
+      "path---index-6f64b530474ca2f18c9d.js.map"
     ],
     "commons": [
       "commons-222912293cef50acfc32.js",
@@ -55,12 +55,12 @@
       "build-js-styles.css.map"
     ],
     "component---src-pages-tours-js": [
-      "component---src-pages-tours-js-8981560863a418928103.js",
-      "component---src-pages-tours-js-8981560863a418928103.js.map"
+      "component---src-pages-tours-js-463a817778c4bdf201e3.js",
+      "component---src-pages-tours-js-463a817778c4bdf201e3.js.map"
     ],
     "path---team": [
-      "path---team-9436100e28aa4a30575d.js",
-      "path---team-9436100e28aa4a30575d.js.map"
+      "path---team-446d117c9d3861524f8a.js",
+      "path---team-446d117c9d3861524f8a.js.map"
     ],
     "path---offline-plugin-app-shell-fallback": [
       "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js",

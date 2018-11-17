@@ -29,8 +29,10 @@
     "import/prefer-default-export": 1,
     "import/no-extraneous-dependencies": "off",
     "react/jsx-filename-extension": "off",
+    "react/jsx-one-expression-per-line": 1,
     "react/no-array-index-key": "off",
     "react/forbid-prop-types": 1,
+    "react/destructuring-assignment": 1,
     "jsx-a11y/anchor-is-valid": "off"
   }
 }

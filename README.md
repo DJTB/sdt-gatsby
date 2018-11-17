@@ -1,1 +1,1 @@
-# Motorbike Tour Site for my Thai guys
+# Simple site for my Thai guys

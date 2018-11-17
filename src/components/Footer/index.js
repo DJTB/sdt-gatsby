@@ -1,8 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Container, Flex, Box } from 'components/Layout';
+import styled from 'styled-components';
+import { StaticQuery, graphql } from 'gatsby';
+
 import colors from 'utils/colors';
+
+import { Container, Flex, Box } from 'components/Layout';
 import ContactInfo from './ContactInfo';
 import TripAdvisorRating from './TripAdvisorRating';
 import TripAdvisorCertificate from './TripAdvisorCertificate';
@@ -51,4 +54,35 @@ Footer.propTypes = {
   tripadvisorUrl: PropTypes.string.isRequired
 };
 
-export default Footer;
+const query = graphql`
+  {
+    allSocialJson {
+      edges {
+        node {
+          address {
+            house
+            city
+            state
+            postcode
+          }
+          phone
+          mobile1
+          mobile2
+          email
+          facebookUrl
+          tripadvisorUrl
+        }
+      }
+    }
+  }
+`;
+
+export default props => (
+  <StaticQuery
+    query={query}
+    render={queryData => {
+      const data = queryData.allSocialJson.edges[0].node;
+      return <Footer {...data} {...props} />;
+    }}
+  />
+);

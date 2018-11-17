@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Link from 'gatsby-link';
-import { Box } from 'components/Layout';
+import { Link } from 'gatsby';
+
 import feather from 'utils/feather';
+import { Box } from 'components/Layout';
 
 const InfoLine = styled.div`
   display: flex;
@@ -53,7 +54,7 @@ const ContactInfo = ({
   facebookUrl
 }) => (
   <Wrapper>
-    <Box is="address" py={2} m={0}>
+    <Box as="address" py={2} m={0}>
       <h3 className="font-brand">SOMETHING DIFFERENT TOURS</h3>
       <Link to="/map">
         <InfoLine>

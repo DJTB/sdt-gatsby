@@ -1,24 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { Container, PageHeading } from 'components/Layout';
+import { graphql } from 'gatsby';
+
+import { Page, Container, PageHeading } from 'components/Layout';
 import Gallery from 'components/Gallery';
 
-export default ({ data }) => (
-  <Container>
-    <Helmet>
-      <title>Gallery</title>
-      <meta
-        name="description"
-        content="Photos taken with customers on Something Different Tours"
+const GalleryPage = ({ data }) => (
+  <Page>
+    <Container>
+      <Helmet>
+        <title>Gallery</title>
+        <meta
+          name="description"
+          content="Photos taken with customers on Something Different Tours"
+        />
+      </Helmet>
+      <PageHeading>Intrepid Explorers</PageHeading>
+      <Gallery
+        data={data.images.edges.map(({ node }) => node.childImageSharp.fluid)}
       />
-    </Helmet>
-    <PageHeading>Intrepid Explorers</PageHeading>
-    <Gallery
-      data={data.images.edges.map(({ node }) => node.childImageSharp.sizes)}
-    />
-  </Container>
+    </Container>
+  </Page>
 );
+
+GalleryPage.propTypes = {
+  data: PropTypes.shape({
+    edges: PropTypes.array
+  }).isRequired
+};
 
 export const pageQuery = graphql`
   query GalleryQuery {
@@ -29,8 +39,8 @@ export const pageQuery = graphql`
       edges {
         node {
           childImageSharp {
-            sizes(maxWidth: 768, quality: 85) {
-              ...GatsbyImageSharpSizes
+            fluid(maxWidth: 768, quality: 85) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
@@ -38,3 +48,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default GalleryPage;

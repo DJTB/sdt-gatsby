@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
+import { graphql } from 'gatsby';
 import { themeGet } from 'styled-system';
-import { Container, PageHeading, Flex } from 'components/Layout';
+
 import feather from 'utils/feather';
 import media from 'utils/media';
+
+import { Page, Container, PageHeading, Flex } from 'components/Layout';
 import Img from 'components/Img';
 
 const Price = styled.p`
@@ -53,7 +56,7 @@ const BulletListWrapper = styled.div`
 
 const ProgramImg = styled.div`
   display: block;
-  width: 320px;
+  width: calc(100vw - 2rem);
   order: -1;
 
   ${media.mid`
@@ -61,7 +64,6 @@ const ProgramImg = styled.div`
     width: 550px;
   `};
 
-  & .gatsby-image-outer-wrapper,
   & .gatsby-image-wrapper {
     height: 100%;
   }
@@ -100,64 +102,76 @@ const Program = styled.div`
 
 const ProgramTitle = styled.h2`
   max-width: 600px;
+  text-align: center;
   margin: 2.75rem auto 0.25rem;
 `;
 
-const BulletList = ({ included, items }) => (
-  <BulletListWrapper included={included}>
-    <h3>Price {`${included ? 'in' : 'ex'}cludes:`}</h3>
-    <ul>
-      {items.map((item, index) => (
-        <li key={index}>
-          {feather({
-            is: 'span',
-            name: included ? 'check-circle' : 'x-circle',
-            measureArray: included ? [20, 20] : [22, 22]
-          })}
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  </BulletListWrapper>
-);
+const BulletList = ({ included, items }) => {
+  const title = `Price ${included ? 'in' : 'ex'}cludes:`;
 
-export default props => {
-  const data = props.data.tours.edges[0].node;
   return (
-    <Container>
-      <Helmet>
-        <title>Tours</title>
-        <meta
-          name="description"
-          content="We provide tours that include (but are not limited to) Off-Road Motorbiking, Jungle Trekking, Waterfalls Swimming, Hot Springs, Elephants, Bamboo Rafting, Hilltribe Villages, Doi Suthep Temple, and Doi Inthanon National Park."
-        />
-      </Helmet>
-      <PageHeading>Tours & Trekking</PageHeading>
-      <Intro>
-        <p>{data.intro}</p>
-      </Intro>
-      <div>
-        {data.programs.map(({ id, title, content, notes, price }) => (
-          <React.Fragment key={id}>
-            <ProgramTitle>{title}</ProgramTitle>
-            <Program>
-              <ProgramContent>
-                {content.map((text, index) => <p key={`c${index}`}>{text}</p>)}
-                {notes.map((text, index) => <p key={`n${index}`}>{text}</p>)}
-                {price && <Price>{price} baht per person per day</Price>}
-              </ProgramContent>
-              <ProgramImg>
-                <Img sizes={props.data[`${id}Img`].childImageSharp.sizes} />
-              </ProgramImg>
-            </Program>
-          </React.Fragment>
+    <BulletListWrapper included={included}>
+      <h3>{title}</h3>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>
+            {feather({
+              is: 'span',
+              name: included ? 'check-circle' : 'x-circle',
+              measureArray: included ? [20, 20] : [22, 22]
+            })}
+            <span>{item}</span>
+          </li>
         ))}
-      </div>
-      <Flex flexWrap="wrap" mx="-1rem" justifyContent="center">
-        <BulletList included items={data.priceIncludes} />
-        <BulletList included={false} items={data.priceExcludes} />
-      </Flex>
-    </Container>
+      </ul>
+    </BulletListWrapper>
+  );
+}
+
+const ToursPage = props => {
+  const data = props.data.tours.edges[0].node;
+
+  return (
+    <Page>
+      <Container>
+        <Helmet>
+          <title>Tours</title>
+          <meta
+            name="description"
+            content="We provide tours that include (but are not limited to) Off-Road Motorbiking, Jungle Trekking, Waterfalls Swimming, Hot Springs, Elephants, Bamboo Rafting, Hilltribe Villages, Doi Suthep Temple, and Doi Inthanon National Park."
+          />
+        </Helmet>
+        <PageHeading>Tours & Trekking</PageHeading>
+        <Intro>
+          <p>{data.intro}</p>
+        </Intro>
+        <div>
+          {data.programs.map(({ id, title, content, notes, price }) => (
+            <React.Fragment key={id}>
+              <ProgramTitle>{title}</ProgramTitle>
+              <Program>
+                <ProgramContent>
+                  {content.map((text, index) => (
+                    <p key={`c${index}`}>{text}</p>
+                  ))}
+                  {notes.map((text, index) => (
+                    <p key={`n${index}`}>{text}</p>
+                  ))}
+                  {price && <Price>{price} baht per person per day</Price>}
+                </ProgramContent>
+                <ProgramImg>
+                  <Img fluid={props.data[`${id}Img`].childImageSharp.fluid} />
+                </ProgramImg>
+              </Program>
+            </React.Fragment>
+          ))}
+        </div>
+        <Flex flexWrap="wrap" mx="-1rem" justifyContent="center">
+          <BulletList included items={data.priceIncludes} />
+          <BulletList included={false} items={data.priceExcludes} />
+        </Flex>
+      </Container>
+    </Page>
   );
 };
 
@@ -181,17 +195,19 @@ export const query = graphql`
     }
     customImg: file(base: { eq: "honda-crf-205-03.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 550, quality: 90) {
-          ...GatsbyImageSharpSizes
+        fluid(maxWidth: 550, quality: 90) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
     placeholderImg: file(base: { eq: "1day-falls.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 550, quality: 90) {
-          ...GatsbyImageSharpSizes
+        fluid(maxWidth: 550, quality: 90) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
   }
 `;
+
+export default ToursPage;

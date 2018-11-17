@@ -1,31 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { themeGet } from 'styled-system';
-import Link from 'gatsby-link';
-import Img from 'components/Img';
+import { graphql, Link } from 'gatsby';
+
 import logoSrc from 'assets/images/logo.png';
 import media from 'utils/media';
-import { Container, PageHeading } from 'components/Layout';
+
+import { Page, Container, PageHeading } from 'components/Layout';
 import { ButtonCta } from 'components/Buttons';
+import Img from 'components/Img';
 
 const isOdd = n => n % 2 !== 0;
 
 const CtaImg = styled(Link)`
   display: block;
-  width: 320px;
+  width: calc(100vw - 2rem);
 
   ${media.large`
     width: 390px;
   `};
 
-  & .gatsby-image-outer-wrapper {
+  & .gatsby-image-wrapper {
     box-shadow: ${themeGet('shadows.box.small')};
     border-radius: ${themeGet('radii')};
-  }
-
-  & .gatsby-image-outer-wrapper,
-  & .gatsby-image-wrapper {
     height: 100%;
   }
 `;
@@ -84,7 +83,7 @@ const CtaItem = styled.div`
 const Cta = ({ title, subtitle, content, action, to, inverse, imgSizes }) => (
   <CtaItem>
     <CtaImg to={to}>
-      <Img sizes={imgSizes} />
+      <Img fluid={imgSizes} />
     </CtaImg>
     <CtaCopy inverse={inverse}>
       <h1>{title}</h1>
@@ -95,33 +94,46 @@ const Cta = ({ title, subtitle, content, action, to, inverse, imgSizes }) => (
   </CtaItem>
 );
 
-export default ({ data }) => {
-  const ctaData = data.allCtaJson.edges;
+const HomePage = ({ data }) => {
+  const {
+    allCtaJson: { edges }
+  } = data;
+
   return (
-    <Container>
-      <Helmet>
-        <title>Home</title>
-        <meta
-          name="description"
-          content="Hilltribe villages, waterfalls, and jungle tours with knowledgeable local guides. Join us for an unforgettable holiday!"
-        />
-      </Helmet>
-      <PageHeading>
-        <div>
-          <img src={logoSrc} alt="" />
-        </div>
-        <div>Something Different Tours</div>
-      </PageHeading>
-      {ctaData.map(({ node }, index) => (
-        <Cta
-          key={index}
-          inverse={isOdd(index)}
-          imgSizes={data[`cta${index + 1}`].childImageSharp.sizes}
-          {...node}
-        />
-      ))}
-    </Container>
+    <Page>
+      <Container>
+        <Helmet>
+          <title>Home</title>
+          <meta
+            name="description"
+            content="Hilltribe villages, waterfalls, and jungle tours with knowledgeable local guides. Join us for an unforgettable holiday!"
+          />
+        </Helmet>
+        <PageHeading>
+          <div>
+            <img src={logoSrc} alt="" />
+          </div>
+          <div>Something Different Tours</div>
+        </PageHeading>
+        {edges.map(({ node }, index) => (
+          <Cta
+            key={index}
+            inverse={isOdd(index)}
+            imgSizes={data[`cta${index + 1}`].childImageSharp.fluid}
+            {...node}
+          />
+        ))}
+      </Container>
+    </Page>
   );
+};
+
+HomePage.propTypes = {
+  data: PropTypes.shape({
+    allCtaJson: PropTypes.shape({
+      edges: PropTypes.array
+    })
+  }).isRequired
 };
 
 export const query = graphql`
@@ -139,24 +151,26 @@ export const query = graphql`
     }
     cta1: file(base: { eq: "cta1.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 390) {
-          ...GatsbyImageSharpSizes
+        fluid(maxWidth: 390) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
     cta2: file(base: { eq: "cta2.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 390) {
-          ...GatsbyImageSharpSizes
+        fluid(maxWidth: 390) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
     cta3: file(base: { eq: "cta3.jpg" }) {
       childImageSharp {
-        sizes(maxWidth: 390) {
-          ...GatsbyImageSharpSizes
+        fluid(maxWidth: 390) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
   }
 `;
+
+export default HomePage;

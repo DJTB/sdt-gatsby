@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import styled, { injectGlobal, ThemeProvider } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Helmet from 'react-helmet';
+
 import 'assets/fonts/Capture_it.css';
-import Navigation from 'components/Navigation';
-import Footer from 'components/Footer';
 import siteBgSrc from 'assets/images/bg-tile.png';
 import theme from 'utils/theme';
 
-/* eslint-disable */
-injectGlobal`
+import Navigation from 'components/Navigation';
+import Footer from 'components/Footer';
+
+const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
@@ -57,9 +58,10 @@ const Main = styled.main`
   margin-bottom: 2rem;
 `;
 
-const Layout = ({ location, children, data }) => (
+const Page = ({ children }) => (
   <ThemeProvider theme={theme}>
-    <React.Fragment>
+    <Fragment>
+      <GlobalStyle />
       <Helmet defaultTitle="SDT" titleTemplate="%s | SDT">
         <meta name="og:type" content="website" />
         <meta name="og:site_name" content="Something Different Tours" />
@@ -68,39 +70,15 @@ const Layout = ({ location, children, data }) => (
         <header>
           <Navigation />
         </header>
-        <Main>{children()}</Main>
-        <Footer {...data.allSocialJson.edges[0].node} />
+        <Main>{children}</Main>
+        <Footer />
       </StickyFooter>
-    </React.Fragment>
+    </Fragment>
   </ThemeProvider>
 );
 
-Layout.propTypes = {
-  children: PropTypes.func.isRequired,
-  data: PropTypes.object.isRequired
+Page.propTypes = {
+  children: PropTypes.func.isRequired
 };
 
-export default Layout;
-
-export const query = graphql`
-  query LayoutQuery {
-    allSocialJson {
-      edges {
-        node {
-          address {
-            house
-            city
-            state
-            postcode
-          }
-          phone
-          mobile1
-          mobile2
-          email
-          facebookUrl
-          tripadvisorUrl
-        }
-      }
-    }
-  }
-`;
+export default Page;

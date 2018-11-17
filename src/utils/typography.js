@@ -11,7 +11,7 @@ import colors from './colors';
  * @param  {Number} [maxWidth=1280] Maximum viewport size to halt scaling (px)
  * @return {String} CSS font-size rules
  */
-export const fluidType = (
+const fluidType = (
   minFont = 16,
   maxFont = 24,
   minWidth = 600,
@@ -97,4 +97,6 @@ const typography = new Typography({
   paragraphSpacing: 0.9
 });
 
-export default typography;
+const { rhythm, scale } = typography;
+
+export { fluidType, rhythm, scale, typography as default };

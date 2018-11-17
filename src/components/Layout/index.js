@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { Flex as GridFlex, Box as GridBox } from 'grid-styled';
+import { Flex as GridFlex, Box as GridBox } from '@rebass/grid';
 import { themeGet } from 'styled-system';
 import { fluidType } from 'utils/typography';
 import media from 'utils/media';
+import PageWrapper from './Page';
 
+export const Page = PageWrapper;
 export const Flex = GridFlex;
 export const Box = GridBox;
 

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Link from 'gatsby-link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { themeGet } from 'styled-system';
 import Headroom from 'react-headroom';
-import { Container } from 'components/Layout';
+import { Link } from 'gatsby';
+
 import media from 'utils/media';
 import feather from 'utils/feather';
+
+import { Container } from 'components/Layout';
 import { ButtonPlain } from 'components/Buttons';
 import MobileNav from './mobile';
 
@@ -14,7 +16,7 @@ const HomeLink = styled(Link)`
   font-size: 2rem;
 `;
 
-const basicNav = styled.div`
+const basicNav = css`
   line-height: 1;
   font-weight: 600;
   width: 100%;
@@ -26,7 +28,7 @@ const basicNav = styled.div`
     box-shadow: ${themeGet('shadows.box.small')};
   }
 
-  & ${Container} {
+  & > div {
     width: 100%;
     padding: 0.5rem 1rem;
     display: flex;
@@ -43,8 +45,13 @@ const basicNav = styled.div`
   }
 `;
 
-const FullNav = basicNav.extend`
+const FullNav = styled.div`
+  ${basicNav};
   display: none;
+
+  ${media.small`
+    display: flex;
+  `};
 
   & ul {
     display: flex;
@@ -77,18 +84,20 @@ const FullNav = basicNav.extend`
 
   & ul li a:hover::after,
   & ul li a:focus::after,
-  & ul li a[aria-current=true]::after {
+  & ul li a[aria-current='true']::after {
     opacity: 0.95;
     transform: translateY(0rem);
   }
-
-  ${media.small`
-    display: flex;
-  `};
 `;
 
 // Styles for the mobile View of the navigation
-const MobileNavToggler = basicNav.extend`
+const MobileNavToggler = styled.div`
+  ${basicNav};
+
+  ${media.small`
+    display: none;
+  `};
+
   & li {
     margin: 0;
   }
@@ -103,15 +112,11 @@ const MobileNavToggler = basicNav.extend`
     display: block;
     margin: auto;
   }
-
-  ${media.small`
-    display: none;
-  `};
 `;
 
 const ROUTES = [
   { to: '/tours', children: 'Tours' },
-  { to: '/rooms', children: 'Rooms' },
+  // { to: '/rooms', children: 'Rooms' },
   { to: '/gallery', children: 'Gallery' },
   { to: '/team', children: 'Team' },
   { to: '/map', children: 'Map' }

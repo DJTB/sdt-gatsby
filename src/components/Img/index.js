@@ -7,8 +7,8 @@ import Image from 'gatsby-image';
 
 const Img = props => {
   // Construct font-family declaration for object-fit-images
-  const objFit = props.objFit ? props.objFit : `cover`;
-  const objPosition = props.objPosition ? props.objPosition : `50% 50%`;
+  const objFit = props.objFit ? props.objFit : 'cover';
+  const objPosition = props.objPosition ? props.objPosition : '50% 50%';
   const fontFamily = `"object-fit: ${objFit}; object-position: ${objPosition}"`;
 
   const polyfillStyles = {
@@ -19,12 +19,11 @@ const Img = props => {
 
   return (
     <Image
-      sizes={props.sizes}
-      resolutions={props.resolutions}
+      fluid={props.fluid}
+      fixed={props.fixed}
       alt={props.alt}
       className={props.className}
       style={props.style}
-      outerWrapperClassName={props.outerWrapperClassName}
       imgStyle={{ borderRadius: '3px', ...props.imgStyle, ...polyfillStyles }}
       position={props.position || `relative`}
       backgroundColor={props.backgroundColor || `transparent`}

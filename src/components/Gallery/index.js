@@ -59,7 +59,7 @@ class Gallery extends React.Component {
       <GalleryWrapper>
         {imgData.map((img, index) => (
           <GalleryItem key={index} onClick={this.handleOpen(index)}>
-            <Img sizes={img} alt="" />
+            <Img fluid={img} alt="" />
           </GalleryItem>
         ))}
         {isOpen && (

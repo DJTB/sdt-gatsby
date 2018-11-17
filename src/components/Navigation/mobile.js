@@ -3,31 +3,34 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { themeGet } from 'styled-system';
+
 import feather from 'utils/feather';
+
 import { ButtonPlain } from 'components/Buttons';
 
 // Styles for the overlay which pops up, when the menu is clicked
 const MobileNavView = styled.nav`
-  position: fixed;
-  background-color: ${themeGet('colors.secondary')};
-  color: ${themeGet('colors.primary')};
   display: block;
-  padding: 1rem;
-  width: 100%;
-  height: 100%;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
   z-index: 9999;
+  background-color: ${themeGet('colors.secondary')};
+  color: ${themeGet('colors.primary')};
 
   & ul {
     list-style-type: none;
     padding: 0;
-    margin: 2rem 0 0 0;
+    margin: 3rem 0 0 0;
     height: 100%;
     text-align: center;
     font-size: 2rem;
+
     & div {
       text-align: center;
     }
@@ -36,6 +39,7 @@ const MobileNavView = styled.nav`
   & ul li {
     margin-top: 2rem;
   }
+
   & div {
     font-weight: 600;
     text-align: right;
@@ -59,12 +63,14 @@ class MobileNav extends Component {
   }
 
   render() {
+    const { children, toggleNav } = this.props;
+
     return ReactDOM.createPortal(
       <MobileNavView>
-        <CloseButton type="button" onClick={this.props.toggleNav}>
+        <CloseButton type="button" onClick={toggleNav}>
           {feather({ name: 'x-square', measureArray: [38, 38] })}
         </CloseButton>
-        {this.props.children}
+        {children}
       </MobileNavView>,
       this.mobileContainer
     );

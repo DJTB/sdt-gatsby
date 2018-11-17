@@ -1,9 +1,11 @@
-exports.modifyWebpackConfig = ({ config, stage }) => {
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
   if (stage === 'build-html') {
-    config.loader('null', {
-      // tries to access window during build stage and blows up
-      test: /react-image-lightbox/,
-      loader: 'null-loader'
+    actions.setWebpackConfig({
+      loaders: {
+        // tries to access window during build stage and blows up
+        test: /react-image-lightbox/,
+        loader: 'null-loader'
+      }
     });
   }
 };

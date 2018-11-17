@@ -3,81 +3,59 @@
   "author": "Duncan Bay",
   "version": "0.0.1",
   "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "feather-icons": "^4.7.0",
-    "gatsby": "^1.9.76",
-    "gatsby-image": "^1.0.13",
-    "gatsby-link": "^1.6.21",
-    "gatsby-plugin-google-analytics": "^1.0.10",
-    "gatsby-plugin-offline": "^1.0.10",
-    "gatsby-plugin-react-helmet": "^2.0.11",
-    "gatsby-plugin-react-next": "^1.0.4",
-    "gatsby-plugin-resolve-src": "^1.1.3",
-    "gatsby-plugin-sharp": "^1.6.9",
-    "gatsby-plugin-styled-components": "^2.0.11",
-    "gatsby-plugin-typography": "^1.7.18",
-    "gatsby-source-filesystem": "^1.5.5",
-    "gatsby-transformer-json": "^1.0.17",
-    "gatsby-transformer-sharp": "^1.6.10",
-    "grid-styled": "^4.1.0",
-    "intersection-observer": "^0.5.0",
-    "object-fit-images": "^3.2.3",
-    "prop-types": "^15.6.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-google-maps": "^9.4.5",
-    "react-headroom": "^2.2.2",
-    "react-helmet": "^5.2.0",
-    "react-image-lightbox": "^5.0.0",
-    "styled-components": "^3.2.6"
-  },
+  "description": "Motorbike Tour Site",
   "scripts": {
     "dev": "gatsby develop",
     "build": "gatsby build",
     "deploy": "npm run build && gh-pages -d public",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "prettify": "prettier --write '{./,__{tests,mocks}__}/**/*.+(js|jsx)'"
+    "test": "jest --config jest.config.js --no-cache",
+    "test:watch": "jest --config jest.config.js --no-cache --watch",
+    "prettify": "prettier --write '{./,__{tests,mocks}__}/**/*.+(js|jsx)'",
+    "cname": "echo somethingdifferenttours.com > ./public/static/CNAME"
   },
-  "jest": {
-    "testRegex": "(\\.(test|spec))\\.(jsx|js)$",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/.cache/"
-    ],
-    "moduleFileExtensions": [
-      "jsx",
-      "js"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "setupFiles": [
-      "<rootDir>/internals/testing/setupTests.js"
-    ],
-    "collectCoverage": true,
-    "coverageReporters": [
-      "lcov",
-      "text",
-      "html"
-    ]
+  "dependencies": {
+    "@rebass/grid": "^6.0.0-4",
+    "feather-icons": "^4.9.0",
+    "gatsby": "^2.0.0",
+    "gatsby-image": "^2.0.20",
+    "gatsby-plugin-google-analytics": "^2.0.7",
+    "gatsby-plugin-offline": "^2.0.15",
+    "gatsby-plugin-react-helmet": "^3.0.2",
+    "gatsby-plugin-resolve-src": "^2.0.0-beta.1",
+    "gatsby-plugin-sharp": "^2.0.12",
+    "gatsby-plugin-styled-components": "^3.0.2",
+    "gatsby-plugin-typography": "^2.2.1",
+    "gatsby-source-filesystem": "^2.0.8",
+    "gatsby-transformer-json": "^2.1.5",
+    "gatsby-transformer-sharp": "^2.1.8",
+    "intersection-observer": "^0.5.1",
+    "object-fit-images": "^3.2.4",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-google-maps": "^9.4.5",
+    "react-headroom": "2.2.2",
+    "react-helmet": "^5.2.0",
+    "react-image-lightbox": "^5.0.0",
+    "react-typography": "^0.16.13",
+    "styled-components": "^4.1.1",
+    "typography": "^0.16.17"
   },
   "devDependencies": {
-    "babel-eslint": "8.2.3",
-    "babel-plugin-styled-components": "^1.5.1",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-styled-components": "^1.8.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
     "enzyme-to-json": "^3.1.4",
-    "eslint": "^4.9.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-prettier": "^2.6.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.4.0",
-    "gh-pages": "1.1.0",
-    "jest": "^22.4.3",
+    "gh-pages": "^2.0.1",
+    "jest": "^23.6.0",
     "prettier": "^1.12.1"
   }
 }

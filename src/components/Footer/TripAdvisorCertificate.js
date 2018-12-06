@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   color: #222;
   width: 130px;
   height: 110px;
-  margin: 0 10px;
   text-align: center;
   border-radius: 5px;
 `;
@@ -41,7 +40,7 @@ const Logo = styled.div`
   }
 `;
 
-const TripAdvisorCertificate = ({ year }) => (
+const TripAdvisorCertificate = ({ year, tripadvisorUrl }) => (
   <Wrapper>
     <Title> Certificate of Excellence </Title>
     <Year>{year}</Year>
@@ -49,7 +48,7 @@ const TripAdvisorCertificate = ({ year }) => (
       <a
         target="_blank"
         rel="external noopener noreferrer"
-        href="https://www.tripadvisor.com/Attraction_Review-g293917-d2103752-Reviews-Something_Different_Tours-Chiang_Mai.html"
+        href={tripadvisorUrl}
       >
         <img src={certificateSrc} alt="TripAdvisor" />
       </a>
@@ -58,7 +57,8 @@ const TripAdvisorCertificate = ({ year }) => (
 );
 
 TripAdvisorCertificate.propTypes = {
-  year: PropTypes.string.isRequired
+  year: PropTypes.string.isRequired,
+  tripadvisorUrl: PropTypes.string.isRequired
 };
 
 export default TripAdvisorCertificate;

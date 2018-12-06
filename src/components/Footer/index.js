@@ -7,7 +7,7 @@ import colors from 'utils/colors';
 
 import { Container, Flex, Box } from 'components/Layout';
 import ContactInfo from './ContactInfo';
-import TripAdvisorRating from './TripAdvisorRating';
+// import TripAdvisorRating from './TripAdvisorRating';
 import TripAdvisorCertificate from './TripAdvisorCertificate';
 
 const Wrapper = styled.footer`
@@ -28,11 +28,11 @@ const Footer = props => (
         <Box px="1rem" flex="0 1 auto">
           <ContactInfo {...props} />
         </Box>
-        <Box px="1rem" alignSelf="flex-end" flex="0 0 auto">
-          <Flex flexWrap="wrap">
-            <TripAdvisorCertificate year="2012 – 2018" />
-            <TripAdvisorRating tripadvisorUrl={props.tripadvisorUrl} />
-          </Flex>
+        <Box m="1rem" alignSelf="flex-end" flex="0 0 auto">
+          <TripAdvisorCertificate
+            year="2012 – 2018"
+            tripadvisorUrl={props.tripadvisorUrl}
+          />
         </Box>
       </Flex>
     </Container>

@@ -20,8 +20,8 @@ const MobileNavView = styled.nav`
   height: 100%;
   padding: 1rem;
   z-index: 9999;
-  background-color: ${themeGet('colors.secondary')};
-  color: ${themeGet('colors.primary')};
+  background-color: ${themeGet('colors.black')};
+  color: ${themeGet('colors.brand')};
 
   & ul {
     list-style-type: none;
@@ -48,8 +48,8 @@ const MobileNavView = styled.nav`
 
 const CloseButton = styled(ButtonPlain)`
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0.9rem;
 `;
 
 class MobileNav extends Component {
@@ -68,7 +68,7 @@ class MobileNav extends Component {
     return ReactDOM.createPortal(
       <MobileNavView>
         <CloseButton type="button" onClick={toggleNav}>
-          {feather({ name: 'x-square', measureArray: [38, 38] })}
+          {feather({ name: 'x', measureArray: [38, 38] })}
         </CloseButton>
         {children}
       </MobileNavView>,

@@ -1,41 +1,22 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
 import { themeGet } from 'styled-system';
+import slugify from 'slugify';
 
+import { fontFamilies } from 'utils/typography';
 import feather from 'utils/feather';
-import media from 'utils/media';
 
-import { Page, Container, PageHeading, Flex } from 'components/Layout';
+import { Page, PageHeading, Container, Flex, Box } from 'components/Layout';
 import Img from 'components/Img';
 
-const Price = styled.p`
-  ${themeGet('fontStyles.price')};
-`;
-
-const Intro = styled.div`
-  margin: 3rem auto;
-  max-width: 700px;
-  font-style: italic;
-  text-align: center;
-`;
-
-const BulletListWrapper = styled.div`
-  margin: 1rem;
-
-  h3 {
-    color: inherit;
-    font-family: ${themeGet('fonts.sans')};
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 0;
-  }
-
+const BulletListWrapper = styled(Box)`
   ul {
-    margin: 1rem 0;
-    padding: 0;
     list-style-type: none;
+    font-size: 0.95em;
+    margin: 0;
+    padding: 0;
   }
 
   li {
@@ -54,64 +35,26 @@ const BulletListWrapper = styled.div`
   }
 `;
 
-const ProgramImg = styled.div`
-  display: block;
-  width: calc(100vw - 2rem);
-  order: -1;
-
-  ${media.mid`
-    order: 1;
-    width: 550px;
-  `};
-
-  & .gatsby-image-wrapper {
-    height: 100%;
+const Program = styled.section`
+  &:last-of-type {
+    margin-bottom: 2rem;
   }
-`;
 
-const ProgramContent = styled.div`
-  max-width: 600px;
-
-  ${media.mid`
-    flex: 1 0 500px;
-  `};
-`;
-
-const Program = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  margin: 0 -0.75rem 2rem;
-
-  & > * {
-    margin: 0.75rem;
+  & p {
+    max-width: 960px;
   }
 
   & p:last-child {
     margin-bottom: 0;
   }
-
-  ${media.mid`
-    flex-flow: row wrap;
-    align-items: flex-start;
-    margin: 0 -1rem 2rem;
-  `};
-`;
-
-const ProgramTitle = styled.h2`
-  max-width: 600px;
-  text-align: center;
-  margin: 2.75rem auto 0.25rem;
 `;
 
 const BulletList = ({ included, items }) => {
-  const title = `Price ${included ? 'in' : 'ex'}cludes:`;
+  const title = `Price ${included ? 'in' : 'ex'}cludes`;
 
   return (
     <BulletListWrapper included={included}>
-      <h3>{title}</h3>
+      <SubHeading>{title}</SubHeading>
       <ul>
         {items.map((item, index) => (
           <li key={index}>
@@ -126,10 +69,77 @@ const BulletList = ({ included, items }) => {
       </ul>
     </BulletListWrapper>
   );
-}
+};
+
+const Price = styled.span`
+  font-size: 0.9rem;
+  ${themeGet('fontStyles.price')};
+`;
+
+const Heading = styled.h1`
+  margin-top: 3rem;
+`;
+
+const SubHeading = styled.h3`
+  margin-bottom: 1rem;
+`;
+
+const SubSection = styled.div`
+  &:not(:first-child) {
+    margin-top: 2rem;
+  }
+
+  & p,
+  & li {
+    font-size: 0.9em;
+  }
+`;
+
+const TitleLink = styled(Box).attrs({
+  color: 'yellow.1',
+  width: [1, 1 / 2, 1 / 2, 1 / 3]
+})`
+
+  &:hover {
+    color: ${themeGet('colors.gray.1')};
+  }
+
+  a {
+    display: block;
+    font-family: ${fontFamilies.serif.join(', ')};
+    padding: 0.5rem 1rem;
+  }
+`;
+
+const Pricing = ({ cost }) => {
+  const multiPricing = cost.length > 1;
+
+  return (
+    <Fragment>
+      <SubHeading>Price</SubHeading>
+      {multiPricing ? (
+        <ul>
+          {cost.map((amount, i) => {
+            const people = ['2 people: ', '3 people: ', '4 or more: '][i];
+            return (
+              <li key={`price-${i}`}>
+                {people}
+                <Price>{amount} baht </Price>per person
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p>
+          <Price>{cost[0]} baht </Price>per person
+        </p>
+      )}
+    </Fragment>
+  );
+};
 
 const ToursPage = props => {
-  const data = props.data.tours.edges[0].node;
+  const tours = props.data.tours.edges[0].node;
 
   return (
     <Page>
@@ -142,34 +152,62 @@ const ToursPage = props => {
           />
         </Helmet>
         <PageHeading>Tours & Trekking</PageHeading>
-        <Intro>
-          <p>{data.intro}</p>
-        </Intro>
-        <div>
-          {data.programs.map(({ id, title, content, notes, price }) => (
-            <React.Fragment key={id}>
-              <ProgramTitle>{title}</ProgramTitle>
-              <Program>
-                <ProgramContent>
-                  {content.map((text, index) => (
-                    <p key={`c${index}`}>{text}</p>
-                  ))}
-                  {notes.map((text, index) => (
-                    <p key={`n${index}`}>{text}</p>
-                  ))}
-                  {price && <Price>{price} baht per person per day</Price>}
-                </ProgramContent>
-                <ProgramImg>
-                  <Img fluid={props.data[`${id}Img`].childImageSharp.fluid} />
-                </ProgramImg>
-              </Program>
-            </React.Fragment>
+        <Flex mx="-1rem" flexWrap="wrap">
+          {tours.programs.map(({ id, title }) => (
+            <TitleLink key={id}>
+              <a href={`#${slugify(title)}`}>{title}</a>
+            </TitleLink>
           ))}
-        </div>
-        <Flex flexWrap="wrap" mx="-1rem" justifyContent="center">
-          <BulletList included items={data.priceIncludes} />
-          <BulletList included={false} items={data.priceExcludes} />
         </Flex>
+        {tours.programs.map(
+          ({ id, title, content, transport, price }) => {
+            const image = props.data[`${id}Img`];
+
+            return (
+              <Program key={id}>
+                <Heading id={slugify(title)}>{title}</Heading>
+                <Flex flexWrap="wrap">
+                  <Box order={1} width={1} my="1rem">
+                    {content.map((text, index) => (
+                      <p key={`c${index}`}>{text}</p>
+                    ))}
+                  </Box>
+                  {(transport || price || image) && (
+                    <Fragment>
+                      <Box order={2} mt="1rem" pl={image && [0, 0, '3rem']} width={image && [1, 1, 1 / 2]}>
+                        {transport && (
+                          <SubSection>
+                            <SubHeading>Transport options</SubHeading>
+                            <Box as="ul" mb={0}>
+                              {transport.map((text, index) => (
+                                <li key={`n${index}`}>{text}</li>
+                              ))}
+                            </Box>
+                          </SubSection>
+                        )}
+                        {price && (
+                          <Fragment>
+                            <SubSection>
+                              <Pricing cost={price.cost} />
+                            </SubSection>
+                            <SubSection>
+                              <BulletList included items={price.includes} />
+                            </SubSection>
+                          </Fragment>
+                        )}
+                      </Box>
+                      {image && (
+                        <Box py="1rem" order={[0, 0, 1]} width={[1, 1, '500px']}>
+                          <Img fluid={image.childImageSharp.fluid} />
+                        </Box>
+                      )}
+                    </Fragment>
+                  )}
+                </Flex>
+              </Program>
+            );
+          }
+        )}
       </Container>
     </Page>
   );
@@ -180,16 +218,69 @@ export const query = graphql`
     tours: allToursJson {
       edges {
         node {
-          intro
-          priceIncludes
-          priceExcludes
           programs {
             id
             title
             content
-            notes
-            price
+            transport
+            price {
+              cost
+              includes
+            }
           }
+        }
+      }
+    }
+  }
+`;
+
+/* 
+ M1Img: file(base: { eq: "M1.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 550, quality: 90) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    M2Img: file(base: { eq: "M2.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 550, quality: 90) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    M6Img: file(base: { eq: "M6.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 550, quality: 90) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    M7Img: file(base: { eq: "M7.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 550, quality: 90) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    M8Img: file(base: { eq: "M8.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 550, quality: 90) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    T1Img: file(base: { eq: "T1.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 550, quality: 90) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    T2Img: file(base: { eq: "T2.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 550, quality: 90) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
@@ -200,14 +291,7 @@ export const query = graphql`
         }
       }
     }
-    placeholderImg: file(base: { eq: "1day-falls.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 550, quality: 90) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`;
+*/
+
 
 export default ToursPage;

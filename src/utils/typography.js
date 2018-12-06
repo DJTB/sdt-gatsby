@@ -57,7 +57,7 @@ const systemStacks = {
 
 export const fontFamilies = {
   sans: ['Cabin', ...systemStacks.sans],
-  serif: ['Kaushan Script', systemStacks.serif],
+  serif: ['Kaushan Script', ...systemStacks.serif],
   brand: ['Capture It', ...systemStacks.sans]
 };
 
@@ -71,7 +71,6 @@ export const fontStyles = {
   `,
   price: css`
     color: ${colors.yellow[2]};
-    font-style: italic;
   `
 };
 

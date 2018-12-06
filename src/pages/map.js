@@ -42,7 +42,7 @@ const MapPage = props => {
         </Box>
         <Map
           {...data}
-          loadingElement={<div style={{ height: `100%` }} />}
+          loadingElement={<div style={{ height: `100%`, minHeight: '75vh' }} />}
           containerElement={<div style={{ height: `75vh` }} />}
           mapElement={<div style={{ height: `100%` }} />}
         />

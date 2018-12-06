@@ -114,6 +114,7 @@ const MobileNavToggler = styled.div`
   }
 `;
 
+const homeRoute = { to: '/', children: 'Home' };
 const ROUTES = [
   { to: '/tours', children: 'Tours' },
   // { to: '/rooms', children: 'Rooms' },
@@ -128,11 +129,7 @@ class Navigation extends Component {
   };
 
   toggleNav = () => {
-    if (this.state.mobileActive) {
-      this.setState({ mobileActive: false });
-    } else {
-      this.setState({ mobileActive: true });
-    }
+    this.setState(({ mobileActive }) => ({ mobileActive: !mobileActive }));
   };
 
   render() {
@@ -169,7 +166,7 @@ class Navigation extends Component {
         {this.state.mobileActive && (
           <MobileNav toggleNav={this.toggleNav}>
             <ul>
-              {ROUTES.map(({ to, children }) => (
+              {[homeRoute, ...ROUTES].map(({ to, children }) => (
                 <li key={to}>
                   <div
                     role="button"

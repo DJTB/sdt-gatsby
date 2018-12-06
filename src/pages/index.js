@@ -8,24 +8,31 @@ import { graphql, Link } from 'gatsby';
 import logoSrc from 'assets/images/logo.png';
 import media from 'utils/media';
 
-import { Page, Container, PageHeading } from 'components/Layout';
+import { Page, Container } from 'components/Layout';
 import { ButtonCta } from 'components/Buttons';
 import Img from 'components/Img';
 
 const isOdd = n => n % 2 !== 0;
 
 const CtaImg = styled(Link)`
-  display: block;
-  width: calc(100vw - 2rem);
+  display: none;
+
+  ${media.small`
+    display: block;
+    width: 100vw;
+    margin: 1.5rem -1rem;
+  `};
 
   ${media.large`
-    width: 390px;
+    width: 450px;
   `};
 
   & .gatsby-image-wrapper {
-    box-shadow: ${themeGet('shadows.box.small')};
-    border-radius: ${themeGet('radii')};
     height: 100%;
+    ${media.large`
+      box-shadow: ${themeGet('shadows.box.small')};
+      border-radius: ${themeGet('radii')};
+    `};
   }
 `;
 
@@ -33,6 +40,7 @@ const CtaButton = ButtonCta.withComponent(Link);
 
 const CtaCopy = styled.div`
   max-width: 600px;
+  margin-bottom: 2rem;
 
   & h1,
   & h3 {
@@ -42,11 +50,16 @@ const CtaCopy = styled.div`
 
   & p {
     margin-left: 0.25rem;
+    margin-right: 0.25rem;
   }
 
+  ${media.small`
+    margin-bottom: 0;
+  `}
+
   ${media.large`
-    flex: 1 0 500px;
-    ${({ inverse }) => inverse && `order: -1`};
+    flex: 1;
+    ${({ inverse }) => inverse && `order: 2`};
   `};
 `;
 
@@ -57,16 +70,10 @@ const CtaItem = styled.div`
   align-content: center;
   justify-content: center;
   text-align: center;
-  margin-left: -1rem;
-  margin-right: -1rem;
   margin-top: 2.75rem;
 
   & + & {
     margin-top: 1.5rem;
-  }
-
-  & > * {
-    margin: 0.75rem;
   }
 
   ${media.large`
@@ -82,17 +89,62 @@ const CtaItem = styled.div`
 
 const Cta = ({ title, subtitle, content, action, to, inverse, imgSizes }) => (
   <CtaItem>
-    <CtaImg to={to}>
-      <Img fluid={imgSizes} />
-    </CtaImg>
     <CtaCopy inverse={inverse}>
       <h1>{title}</h1>
       <h3>{subtitle}</h3>
       <p>{content}</p>
       <CtaButton to={to}>{action}</CtaButton>
     </CtaCopy>
+    <CtaImg to={to}>
+      <Img fluid={imgSizes} rounded={false} />
+    </CtaImg>
   </CtaItem>
 );
+
+const Hero = styled.header`
+  display: flex;
+  position: relative;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  text-align: center;
+
+  ${media.large`
+     min-height: 66vh;
+  `}
+
+  & > .gatsby-image-wrapper {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const HeroScrim = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(20, 20, 20, 0.4)
+  );
+  z-index: -1;
+`;
 
 const HomePage = ({ data }) => {
   const {
@@ -101,20 +153,28 @@ const HomePage = ({ data }) => {
 
   return (
     <Page>
+      <Helmet>
+        <title>Home</title>
+        <meta
+          name="description"
+          content="Hilltribe villages, waterfalls, and jungle tours with knowledgeable local guides. Join us for an unforgettable holiday!"
+        />
+      </Helmet>
+      <Hero>
+        <Img
+          objectPosition="center 18%"
+          fluid={data.hero.childImageSharp.fluid}
+          alt="Guests on tour in jungle"
+        />
+        <HeroScrim />
+        <img
+          src={logoSrc}
+          alt="SDT Logo"
+          onLoad={() => performance.mark('hero1')}
+        />
+        <h1 className="font-brand">Something Different Tours</h1>
+      </Hero>
       <Container>
-        <Helmet>
-          <title>Home</title>
-          <meta
-            name="description"
-            content="Hilltribe villages, waterfalls, and jungle tours with knowledgeable local guides. Join us for an unforgettable holiday!"
-          />
-        </Helmet>
-        <PageHeading>
-          <div>
-            <img src={logoSrc} alt="" />
-          </div>
-          <div>Something Different Tours</div>
-        </PageHeading>
         {edges.map(({ node }, index) => (
           <Cta
             key={index}
@@ -149,23 +209,30 @@ export const query = graphql`
         }
       }
     }
-    cta1: file(base: { eq: "cta1.jpg" }) {
+    hero: file(base: { eq: "hero-tour.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 390) {
+        fluid(maxWidth: 3000) {
           ...GatsbyImageSharpFluid
         }
       }
     }
-    cta2: file(base: { eq: "cta2.jpg" }) {
+    cta1: file(base: { eq: "hero-temple.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 390) {
+        fluid(maxWidth: 1024) {
           ...GatsbyImageSharpFluid
         }
       }
     }
-    cta3: file(base: { eq: "cta3.jpg" }) {
+    cta2: file(base: { eq: "hero-landscape.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 390) {
+        fluid(maxWidth: 1024) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    cta3: file(base: { eq: "tour3.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1024) {
           ...GatsbyImageSharpFluid
         }
       }

@@ -3,7 +3,7 @@
 export const palette = {
   brand: '#ff8f33',
   accent: '#fadfa8',
-  white: '#fefefe',
+  white: '#f0f0f0',
   black: '#433e39',
   gray: [
     '#f9f9f8',

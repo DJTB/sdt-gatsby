@@ -99,7 +99,6 @@ const TitleLink = styled(Box).attrs({
   color: 'yellow.1',
   width: [1, 1 / 2, 1 / 2, 1 / 3]
 })`
-
   &:hover {
     color: ${themeGet('colors.gray.1')};
   }
@@ -159,55 +158,58 @@ const ToursPage = props => {
             </TitleLink>
           ))}
         </Flex>
-        {tours.programs.map(
-          ({ id, title, content, transport, price }) => {
-            const image = props.data[`${id}Img`];
+        {tours.programs.map(({ id, title, content, transport, price }) => {
+          const image = props.data[`${id}Img`];
 
-            return (
-              <Program key={id}>
-                <Heading id={slugify(title)}>{title}</Heading>
-                <Flex flexWrap="wrap">
-                  <Box order={1} width={1} my="1rem">
-                    {content.map((text, index) => (
-                      <p key={`c${index}`}>{text}</p>
-                    ))}
-                  </Box>
-                  {(transport || price || image) && (
-                    <Fragment>
-                      <Box order={2} mt="1rem" pl={image && [0, 0, '3rem']} width={image && [1, 1, 1 / 2]}>
-                        {transport && (
-                          <SubSection>
-                            <SubHeading>Transport options</SubHeading>
-                            <Box as="ul" mb={0}>
-                              {transport.map((text, index) => (
-                                <li key={`n${index}`}>{text}</li>
-                              ))}
-                            </Box>
-                          </SubSection>
-                        )}
-                        {price && (
-                          <Fragment>
-                            <SubSection>
-                              <Pricing cost={price.cost} />
-                            </SubSection>
-                            <SubSection>
-                              <BulletList included items={price.includes} />
-                            </SubSection>
-                          </Fragment>
-                        )}
-                      </Box>
-                      {image && (
-                        <Box py="1rem" order={[0, 0, 1]} width={[1, 1, '500px']}>
-                          <Img fluid={image.childImageSharp.fluid} />
-                        </Box>
+          return (
+            <Program key={id}>
+              <Heading id={slugify(title)}>{title}</Heading>
+              <Flex flexWrap="wrap">
+                <Box order={1} width={1} my="1rem">
+                  {content.map((text, index) => (
+                    <p key={`c${index}`}>{text}</p>
+                  ))}
+                </Box>
+                {(transport || price || image) && (
+                  <Fragment>
+                    <Box
+                      order={2}
+                      mt="1rem"
+                      pl={image && [0, 0, '3rem']}
+                      width={image && [1, 1, 1 / 2]}
+                    >
+                      {transport && (
+                        <SubSection>
+                          <SubHeading>Transport options</SubHeading>
+                          <Box as="ul" mb={0}>
+                            {transport.map((text, index) => (
+                              <li key={`n${index}`}>{text}</li>
+                            ))}
+                          </Box>
+                        </SubSection>
                       )}
-                    </Fragment>
-                  )}
-                </Flex>
-              </Program>
-            );
-          }
-        )}
+                      {price && (
+                        <Fragment>
+                          <SubSection>
+                            <Pricing cost={price.cost} />
+                          </SubSection>
+                          <SubSection>
+                            <BulletList included items={price.includes} />
+                          </SubSection>
+                        </Fragment>
+                      )}
+                    </Box>
+                    {image && (
+                      <Box py="1rem" order={[0, 0, 1]} width={[1, 1, '500px']}>
+                        <Img fluid={image.childImageSharp.fluid} />
+                      </Box>
+                    )}
+                  </Fragment>
+                )}
+              </Flex>
+            </Program>
+          );
+        })}
       </Container>
     </Page>
   );
@@ -292,6 +294,5 @@ export const query = graphql`
       }
     }
 */
-
 
 export default ToursPage;

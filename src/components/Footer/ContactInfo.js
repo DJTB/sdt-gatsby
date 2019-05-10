@@ -29,6 +29,11 @@ const Wrapper = styled.div`
     margin-bottom: 0.25rem;
   }
 
+  & .small {
+    margin-left: 0.3rem;
+    font-size: 0.8em;
+  }
+
   & > * {
     flex: 1 1 auto;
   }
@@ -61,7 +66,7 @@ const ContactInfo = ({
           {icon('map')}
           <span>
             {address.house} <br />
-            {address.city}, {address.state}, {address.postcode}
+            {address.city},{address.state},{address.postcode}
           </span>
         </InfoLine>
       </Link>
@@ -72,6 +77,7 @@ const ContactInfo = ({
       <InfoLink href={`tel:${mobile1}`}>
         {icon('smartphone')}
         <span>{mobile1}</span>
+        <span className="small">(Whatsapp)</span>
       </InfoLink>
       <InfoLink href={`tel:${mobile2}`}>
         {icon('smartphone')}

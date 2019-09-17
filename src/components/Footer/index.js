@@ -30,7 +30,7 @@ const Footer = props => (
         </Box>
         <Box m="1rem" alignSelf="flex-end" flex="0 0 auto">
           <TripAdvisorCertificate
-            year="2012 – 2018"
+            year={`2012 – ${new Date().getFullYear()}`}
             tripadvisorUrl={props.tripadvisorUrl}
           />
         </Box>

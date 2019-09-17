@@ -66,7 +66,11 @@ const ContactInfo = ({
           {icon('map')}
           <span>
             {address.house} <br />
-            {address.city},{address.state},{address.postcode}
+            {address.city}
+            {', '}
+            {address.state}
+            {', '}
+            {address.postcode}
           </span>
         </InfoLine>
       </Link>

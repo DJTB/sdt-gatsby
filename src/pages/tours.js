@@ -137,8 +137,33 @@ const Pricing = ({ cost }) => {
   );
 };
 
+const InfoBanner = props => (
+  <Flex justifyContent="center" fontSize="1.2em" {...props}>
+    <Box
+      as="p"
+      m={0}
+      p={2}
+      style={{ border: '2px solid orange', borderRadius: '8px' }}
+    >
+      <span role="img" aria-label="man bowing emoji">
+        🙇
+      </span>
+      <span style={{ margin: '0 4px' }}>
+        Tours paused until May 2020, please check with us again then!
+      </span>
+      <span role="img" aria-label="man bowing emoji">
+        🙇
+      </span>
+    </Box>
+  </Flex>
+);
+
 const ToursPage = props => {
   const tours = props.data.tours.edges[0].node;
+
+  // show until May 1 2020
+  const shouldShowToursClosedInfo =
+    new Date().getMonth() < 4 && new Date().getFullYear() === 2020;
 
   return (
     <Page>
@@ -188,15 +213,24 @@ const ToursPage = props => {
                           </Box>
                         </SubSection>
                       )}
-                      {price && (
+                      {shouldShowToursClosedInfo ? (
                         <Fragment>
                           <SubSection>
-                            <Pricing cost={price.cost} />
-                          </SubSection>
-                          <SubSection>
-                            <BulletList included items={price.includes} />
+                            <SubHeading>Price</SubHeading>
+                            <InfoBanner />
                           </SubSection>
                         </Fragment>
+                      ) : (
+                        price && (
+                          <Fragment>
+                            <SubSection>
+                              <Pricing cost={price.cost} />
+                            </SubSection>
+                            <SubSection>
+                              <BulletList included items={price.includes} />
+                            </SubSection>
+                          </Fragment>
+                        )
                       )}
                     </Box>
                     {image && (
@@ -236,7 +270,7 @@ export const query = graphql`
   }
 `;
 
-/* 
+/*
  M1Img: file(base: { eq: "M1.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 550, quality: 90) {

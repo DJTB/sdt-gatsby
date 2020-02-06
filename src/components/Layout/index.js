@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Flex as GridFlex, Box as GridBox } from '@rebass/grid';
-import { themeGet } from 'styled-system';
+import { themeGet } from '@styled-system/theme-get';
 
 import { fluidType } from 'utils/typography';
 import media from 'utils/media';

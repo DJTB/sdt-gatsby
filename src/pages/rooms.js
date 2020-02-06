@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { themeGet } from 'styled-system';
+import { themeGet } from '@styled-system/theme-get';
 import { graphql } from 'gatsby';
 
 import { Page, Container, Flex, Box, PageHeading } from 'components/Layout';

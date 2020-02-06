@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
-import { themeGet } from 'styled-system';
+import { themeGet } from '@styled-system/theme-get';
 import slugify from 'slugify';
 
 import { fontFamilies } from 'utils/typography';

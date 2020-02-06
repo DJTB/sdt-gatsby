@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { themeGet } from 'styled-system';
+import { themeGet } from '@styled-system/theme-get';
 
 const buttonReset = css`
   display: inline-flex;
